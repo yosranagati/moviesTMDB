@@ -1,11 +1,80 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="17G4015" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="TopRated" representedClassName="TopRated" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="postIconPath" optional="YES" attributeType="URI" syncable="YES"/>
-        <attribute name="title" attributeType="String" syncable="YES"/>
+    <entity name="Genre" representedClassName=".Genre" syncable="YES" codeGenerationType="class">
+        <attribute name="genreId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="name"/>
+            </userInfo>
+        </attribute>
+        <relationship name="parentMovie" optional="YES" maxCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="TopRated" inverseName="genres" inverseEntity="TopRated" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="genres"/>
+            </userInfo>
+        </relationship>
+        <userInfo>
+            <entry key="identityAttributes" value="genreId"/>
+        </userInfo>
+    </entity>
+    <entity name="TopRated" representedClassName=".TopRated" syncable="YES" codeGenerationType="class">
+        <attribute name="genre" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="genre"/>
+            </userInfo>
+        </attribute>
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="original_title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orignalLanguage" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="original_language"/>
+            </userInfo>
+        </attribute>
+        <attribute name="popularity" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="poster_path" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="poster_path"/>
+            </userInfo>
+        </attribute>
+        <attribute name="release_date" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="release_date"/>
+            </userInfo>
+        </attribute>
+        <attribute name="title" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="title"/>
+            </userInfo>
+        </attribute>
+        <attribute name="voteAv" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="vote_average"/>
+            </userInfo>
+        </attribute>
+        <attribute name="voteCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="vote_count"/>
+            </userInfo>
+        </attribute>
+        <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Genre" inverseName="parentMovie" inverseEntity="Genre" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value=" genres"/>
+                <entry key="key" value="value"/>
+            </userInfo>
+        </relationship>
+        <userInfo>
+            <entry key="identityAttributes" value="id,title"/>
+        </userInfo>
     </entity>
     <elements>
-        <element name="TopRated" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Genre" positionX="206.03515625" positionY="22.05859375" width="128" height="90"/>
+        <element name="TopRated" positionX="-63" positionY="-18" width="128" height="210"/>
     </elements>
 </model>
