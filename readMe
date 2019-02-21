@@ -1,0 +1,14 @@
+This is a task project for Algorithmz
+
+in this Project I used some CocoPod libraries to help me as follow 
+
+1- Alamofire : an HTTP networking library to help in connecting to API 
+2- SwiftyJSON : to help in dealing with JSon 
+3- Groot : to help in saving objects from Json to core data
+4 - SVProgressHUD : to count progress - has not been used unfortunately.
+
+
+
+
+
+ 

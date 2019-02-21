@@ -15,9 +15,9 @@ import Groot
 class TopMoviesTableViewController: UITableViewController {
 
     var topMovies = [TopRated]()
-    let url = "https://api.themoviedb.org/3/movie/top_rated"
-    let api_key = "2376e4c6e95d883b82d31e2a21d09c1e"
-    var  params : [String : String] = [:]
+    let url = "\(API.BaseURL)top_rated"
+    
+    lazy var  params : [String : String] = ["api_key" : API.key]
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     @IBOutlet var moviesTable: UITableView!
@@ -25,7 +25,7 @@ class TopMoviesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        params = ["api_key" : api_key]
+     
         
         getmovieData(url: self.url, parameters: params)
         loadMoviesdata()

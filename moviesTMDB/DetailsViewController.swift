@@ -22,20 +22,19 @@ class DetailsViewController: UIViewController {
     @IBOutlet var releaseDate: UILabel!
     @IBOutlet var avVote: UILabel!
     var movieDetailsData = [TopRated]()
-    var url = "https://api.themoviedb.org/3/movie/"
-    let api_key = "2376e4c6e95d883b82d31e2a21d09c1e"
-    var params : [String : String] = [:]
+    var url = API.BaseURL
+   
+    lazy var params : [String : String] = ["api_key" : API.key]
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var movieDetails : TopRated?{
         didSet{
-            print("selectedMovie \(movieDetails!)")
            
-            params = ["api_key" : self.api_key]
+           
             self.title = movieDetails?.title
             let number = movieDetails?.id
             url += "\(number!)"
-            print(url)
+           
             getmovieData(url: url, parameters: params)
           
             
@@ -66,7 +65,7 @@ class DetailsViewController: UIViewController {
 
                 var moviesDic = movieJSON.dictionaryObject as [String: AnyObject]?
                 var genre : String = ""
-                for (index,genreItem) in movieJSON["genres"]{
+                for (_,genreItem) in movieJSON["genres"]{
                    
                    genre += " \(genreItem["name"])"
                 }
