@@ -14,7 +14,7 @@ import Groot
 
 class TopMoviesTableViewController: UITableViewController {
 
-    var topMovies = [TopRated]()
+    var topMovies = [movieViewModel]()
     let url = "\(API.BaseURL)top_rated"
     
     lazy var  params : [String : String] = ["api_key" : API.key]
@@ -46,26 +46,11 @@ class TopMoviesTableViewController: UITableViewController {
    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customMovieCell", for: indexPath) as! CustomMovieCell
-        cell.title.text = self.topMovies[indexPath.row].title!
-        if let genreExsit = self.topMovies[indexPath.row].genre {
-              cell.genre.text = genreExsit
-        }
-        else{
-            cell.genre.text = ""
-        }
-      
-        
-        let pictureString =   self.topMovies[indexPath.row].poster_path!
        
-        let pictureURL = URL(string: "https://image.tmdb.org/t/p/w500/\(pictureString)")
-        let data = try? Data(contentsOf: pictureURL!)
-        
-        if let imageData = data {
-          cell.poster.image = UIImage(data: imageData)
-        }
       
 
-        
+        let topMovie = topMovies[indexPath.row]
+        cell.movieViewModel = topMovie
 
         return cell
     }
@@ -141,8 +126,8 @@ class TopMoviesTableViewController: UITableViewController {
         
         
         do{
-            self.topMovies = try context.fetch(request)
-            print(request);
+            let fetchMoviesArray = try context.fetch(request)
+            self.topMovies = fetchMoviesArray.map({return movieViewModel(movie: $0)}) 
             
         }catch{
             print("error on get request this context, \(error)")
@@ -160,7 +145,7 @@ class TopMoviesTableViewController: UITableViewController {
         let destination = segue.destination as! DetailsViewController
         if let indexPath = tableView.indexPathForSelectedRow{
             
-            destination.movieDetails = self.topMovies[indexPath.row]
+           destination.movieDetails = self.topMovies[indexPath.row]
         }
         
     }

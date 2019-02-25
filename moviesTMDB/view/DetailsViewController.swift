@@ -27,7 +27,7 @@ class DetailsViewController: UIViewController {
     lazy var params : [String : String] = ["api_key" : API.key]
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    var movieDetails : TopRated?{
+    var movieDetails : movieViewModel?{
         didSet{
            
            
